@@ -61,3 +61,71 @@ class StoryTag(models.Model):
             'language': self.language.serialize,
             'is_active': self.is_active
         }
+
+
+class Story(models.Model):
+    language = models.ForeignKey(Languages, verbose_name=_("language"),
+                                 default=None, on_delete=models.DO_NOTHING)
+    tags = models.ManyToManyField(StoryTag, verbose_name=_("tags"),
+                                  default=None)
+    image = models.ForeignKey(StoryImage, verbose_name=_("image"),
+                              default=None, on_delete=models.DO_NOTHING)
+    title = models.CharField(_("title"), max_length=255, default=None,
+                             unique=True)
+    description = models.TextField(_("description"), default=None)
+    text = models.TextField(_("text"), default=None)
+    author = models.ForeignKey(User, verbose_name=_("user"), default=None,
+                               on_delete=models.DO_NOTHING)
+    slug = models.CharField(_("slug"), max_length=255, default=None,
+                            unique=True)
+    is_active = models.BooleanField(_("is active"), default=True)
+    views = models.IntegerField(default=0)
+
+    created = models.DateTimeField(verbose_name=_("created"),
+                                   auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(verbose_name=_("updated"),
+                                   auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = "story"
+        verbose_name = _('Story')
+        verbose_name_plural = _('Stories')
+
+    def get_tags(self):
+        return [tag.serialize for tag in self.tags.all()]
+
+    @property
+    def serialise(self):
+        return {
+            'language': self.language.serialize,
+            'tags': self.get_tags(),
+            'image': self.image,
+            'title': self.title,
+            'description': self.description,
+            'text': self.text,
+            'author': self.author,
+            'slug': self.slug,
+            'is_active': self.is_active,
+            'views': self.views,
+            'created': self.created,
+            'updated': self.updated
+        }
+
+    @property
+    def count_published_articles_by_author(self):
+        """Return amount of published articles
+        :return int:
+        """
+        return Story.objects.filter(
+            author_id=self.author_id).all().count() or 0
+
+    @property
+    def count_readers(self):
+        """Return amount of readers by author
+        :return int:
+        """
+        return Readers.objects.filter(
+            author_id=self.author_id).all().count() or 0
