@@ -39,3 +39,25 @@ class StoryImage(models.Model):
             'updated': self.updated
         }
 
+
+class StoryTag(models.Model):
+    tag = models.CharField(_("tag"), max_length=65, default=None)
+    language = models.ForeignKey(Languages, verbose_name=_("language"),
+                                 default=None, on_delete=models.DO_NOTHING)
+    is_active = models.BooleanField(_("is active"), default=True)
+
+    def __str__(self):
+        return self.tag
+
+    class Meta:
+        db_table = "story_tag"
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
+
+    @property
+    def serialize(self):
+        return {
+            'tag': self.tag,
+            'language': self.language.serialize,
+            'is_active': self.is_active
+        }
