@@ -33,6 +33,13 @@ class UserManager(BaseUserManager):
         return self._add_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
+        """
+        Create a new superuser
+        :param email: string
+        :param password: string
+        :param extra_fields: other fields
+        :return: method
+        """
         extra_fields.setdefault('is_superuser', True)
 
         if extra_fields.get('is_superuser') is not True:
