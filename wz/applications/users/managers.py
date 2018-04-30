@@ -22,6 +22,13 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
+        """
+        Create a new user in database
+        :param email: string
+        :param password: string
+        :param extra_fields: other fields
+        :return: method
+        """
         extra_fields.setdefault('is_superuser', False)
         return self._add_user(email, password, **extra_fields)
 
