@@ -78,3 +78,17 @@ class User(AbstractBaseUser, PermissionsMixin):
             'avatar': self.avatar,
             'is_staff': self.is_staff
         }
+
+
+class Readers(models.Model):
+    author = models.ForeignKey(User, related_name=_("author"),
+                               on_delete=models.DO_NOTHING)
+    reader = models.ForeignKey(User, related_name=_("reader"),
+                               on_delete=models.DO_NOTHING)
+
+    @property
+    def count_readers(self):
+        """Return quantity of readers by author
+        :return int:
+        """
+        return Readers.objects.filter(author=self.author).all().count() or 0
