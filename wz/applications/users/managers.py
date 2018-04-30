@@ -6,7 +6,13 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _add_user(self, email, password, **extra_fields):
-
+        """
+        Creates and saves a User with the given email and password.
+        :param email: string
+        :param password: string
+        :param extra_fields: other fields
+        :return: object
+        """
         if not email:
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
