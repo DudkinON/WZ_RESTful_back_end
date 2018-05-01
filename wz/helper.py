@@ -10,7 +10,13 @@ from string import ascii_uppercase as uppercase, digits
 
 
 def get_path(instance, filename, folder):
-
+    """
+    Generate a unique path for image
+    :param instance: object
+    :param filename: string
+    :param folder: string
+    :return string: string
+    """
     ext = filename.split('.')[-1]
     hash_ = hashlib.md5()
     hash_.update(repr(random()).encode('utf-8'))
