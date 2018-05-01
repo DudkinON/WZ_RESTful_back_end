@@ -1,0 +1,7 @@
+.idea/
+db.sqlite3
+.DS_Store
+/wz/applications/main/migrations/
+/wz/applications/story/migrations/
+/wz/applications/users/migrations/
+/wz/keys.py
