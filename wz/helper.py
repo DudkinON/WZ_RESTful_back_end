@@ -25,3 +25,8 @@ def get_path(instance, filename, folder):
                                hash_name[4:6])
     filename = '{0}.{1}'.format(hash_name[6:], ext)
     return '{0}/{1}'.format(path_to_img, filename)
+
+
+def get_image_path(instance, filename):
+
+    return get_path(instance, filename, STORY_IMG_ROOT)
