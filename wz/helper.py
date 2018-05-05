@@ -28,5 +28,9 @@ def get_path(instance, filename, folder):
 
 
 def get_image_path(instance, filename):
-
+    """Return path for article image
+    :param instance: object
+    :param filename: string
+    :return: string
+    """
     return get_path(instance, filename, STORY_IMG_ROOT)
