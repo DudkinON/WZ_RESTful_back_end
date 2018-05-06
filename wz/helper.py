@@ -34,3 +34,8 @@ def get_image_path(instance, filename):
     :return: string
     """
     return get_path(instance, filename, STORY_IMG_ROOT)
+
+
+def get_user_image_path(instance, filename):
+
+    return get_path(instance, filename, USER_IMAGES_ROOT)
