@@ -37,5 +37,9 @@ def get_image_path(instance, filename):
 
 
 def get_user_image_path(instance, filename):
-
+    """Return path for user avatar
+    :param instance: object
+    :param filename: string
+    :return: string
+    """
     return get_path(instance, filename, USER_IMAGES_ROOT)
