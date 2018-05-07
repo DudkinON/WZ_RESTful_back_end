@@ -43,3 +43,8 @@ def get_user_image_path(instance, filename):
     :return: string
     """
     return get_path(instance, filename, USER_IMAGES_ROOT)
+
+
+def get_unique_str(amount):
+
+    return ''.join(choice(uppercase + digits) for x in range(amount))
