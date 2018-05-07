@@ -46,5 +46,8 @@ def get_user_image_path(instance, filename):
 
 
 def get_unique_str(amount):
-
+    """
+    Return a unique name string amount characters
+    :return: string
+    """
     return ''.join(choice(uppercase + digits) for x in range(amount))
