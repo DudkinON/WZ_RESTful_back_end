@@ -51,3 +51,8 @@ def get_unique_str(amount):
     :return: string
     """
     return ''.join(choice(uppercase + digits) for x in range(amount))
+
+
+def get_json(data):
+
+    return dumps(data, ensure_ascii=False)
